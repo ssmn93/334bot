@@ -1,0 +1,52 @@
+{
+  "name": "glitch-hello-node",
+  "version": "0.1.0",
+  "description": "A simple Node app built on fastify, instantly up and running. Built to be remixed on Glitch.com.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@discordjs/voice": "^0.17.0",
+    "@distube/ytdl-core": "^4.14.4",
+    "@fastify/formbody": "^7.4.0",
+    "@fastify/static": "^6.10.2",
+    "@fastify/view": "^8.0.0",
+    "axios": "^1.7.2",
+    "canvas": "^2.11.2",
+    "cheerio": "^1.0.0",
+    "cron": "^3.1.7",
+    "ddg-api": "^0.0.1",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5",
+    "duckduckgo-search": "^1.0.7",
+    "erela.js": "^2.4.0",
+    "fastify": "^4.21.0",
+    "handlebars": "^4.7.8",
+    "isgd": "^1.1.3",
+    "keyv": "^4.5.4",
+    "lavasfy": "^2.3.0",
+    "node-cron": "^3.0.3",
+    "node-web-streams": "^0.2.2",
+    "play-dl": "^1.9.7",
+    "request": "^2.88.2",
+    "rss-parser": "^3.13.0",
+    "web-streams-polyfill": "^4.0.0",
+    "yt-dlp-wrap": "^2.3.12",
+    "ytdl-core": "^4.11.5"
+  },
+  "engines": {
+    "node": "^16.14.0"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/334bot-newest"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch"
+  ],
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}

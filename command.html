@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="&quot;王道を往く&quot;、そんなbotへ。discordの多機能bot「334bot」の公式ホームページです。">
+  <link rel="icon" href="https://cdn.glitch.global/db27db86-791c-40f5-9ee5-9cd4045e87ea/icon.png?v=1730011051492" />
+  <link href="http://fonts.googleapis.com/earlyaccess/notosansjp.css">
+  <title>コマンドジェネレーター｜"王道を往く"、そんなbotへ。334bot</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .content { display: none; }
+    .visible { display: block; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <a href="https://334bot-official.glitch.me/" class="title-link">
+        <img src="https://cdn.glitch.global/db27db86-791c-40f5-9ee5-9cd4045e87ea/icon.png?v=1730011051492" alt="334botアイコン" class="logo">
+        <h1 class="title">334bot</h1>
+      </a>
+    </div>
+    <nav class="nav">
+      <ul class="menu-group">
+        <li class="menu-item"><a href="https://discord.com/oauth2/authorize?client_id=1127233136762298368&permissions=8&scope=bot+applications.commands">招待</a></li>
+        <li class="menu-item"><a href="howto.html">使い方</a></li>
+        <li class="menu-item"><a href="support.html">サポート</a></li>
+        <li class="menu-item"><a href="termsofservice.html">利用規約</a></li>
+      </ul>
+    </nav>
+  </header>
+    <div class="background-image">
+      <div class="content">
+        <h1>334bot</h1>
+        <p>"王道を往く"、そんなbotへ。</p>
+        <div class="button-group">
+          <button onclick="location.href='https://discord.com/oauth2/authorize?client_id=1127233136762298368&permissions=8&scope=bot+applications.commands'" class="invite">招待</button>
+          <button onclick="location.href='support.html'" class="support">サポート</button>
+        </div>
+      </div>
+    </div>
+  <form action="program.php" method="post">
+    <dl>
+      <dt>機能選択</dt>
+      <dd>
+        <select name="機能選択" id="menu" onchange="showContent()" required>
+          <option value="">選択してください</option>
+          <option value="post">/post(画像投稿)</option>
+          <option value="anonymous">/anonymous(匿名メッセージ送信/送信元特定)</option>
+          <option value="memo">/memo(メモ登録)</option>
+          <option value="invite">/invite(bot/サーバーの招待リンク)</option>
+          <option value="dice">/dice(サイコロ)</option>
+          <option value="translate">/translate(翻訳)</option>
+          <option value="support">/support(サポート)</option>
+          <option value="ai">/ai(aiと会話)</option>
+          <option value="calculator">/calculator(電卓)</option>
+          <option value="url">/url(is.gdによるリンク短縮)</option>
+          <option value="now">/now(現在時刻)</option>
+          <option value="embed">/embed(埋め込み)</option>
+          <option value="delete">/delete(メッセージ削除)</option>
+          <option value="role">/role(ロール取得用ボタンの生成)</option>
+          <option value="timer">/timer(タイマー)</option>
+          <option value="rss">/rss(地震情報等の設定)</option>
+          <option value="reply">/reply(特定単語への返信設定)</option>
+          <option value="sec">/sec(334sec関連の設定)</option>
+          <option value="lock">/lock(メッセージ固定)</option>
+          <option value="afk">/afk(AFKの設定)</option>
+          <option value="log">/log(334log関連の設定)</option>
+          <option value="channel">/channel(チャンネル系機能の設定)</option>
+        </select>
+      </dd>
+    </dl>
+
+    <!-- 各オプションのコンテンツ -->
+    <div id="post" class="content"></div>
+    <div id="anonymous" class="content">
+      <dl>
+        <dd>
+          <dt>アクション選択</dt>
+          <label>
+            <input type="radio" name="action" value="post" required>投稿
+          </label>
+          <label>
+            <input type="radio" name="action" value="view">投稿者確認
+          </label>
+        </dd>
+        <dd>
+          <dt>投稿内容または投稿者を確認する投稿のメッセージID</dt>
+          <input type="text" name="content" value="content" id="content" required>
+        </dd>
+      </dl>
+      <p id="anonymousGeneratedText">ここに生成されたテキストが表示されます。</p>
+      <button type="button" onclick="anonymous()">送信</button>
+      <button type="button" onclick="copyText('anonymousGeneratedText')">コピー</button>
+    </div>
+
+    <div id="memo" class="content">
+    </div>
+  
+    <div id="invite" class="content">
+      <dl>
+        <dd>
+          <dt>選択</dt>
+          <label>
+            <input type="radio" name="choice" value="server" required>サーバーの招待リンク
+          </label>
+          <label>
+            <input type="radio" name="choice" value="bot">botの招待リンク
+          </label>
+        </dd>
+      </dl>
+      <p id="inviteGeneratedText">ここに生成されたテキストが表示されます。</p>
+      <button type="button" onclick="invite()">送信</button>
+      <button type="button" onclick="copyText('inviteGeneratedText')">コピー</button>
+    </div>
+
+    <!-- 他のコンテンツ -->
+    <div id="dice" class="content">diceの内容</div>
+    <div id="translate" class="content">translateの内容</div>
+    <div id="support" class="content">supportの内容</div>
+    <div id="ai" class="content">aiの内容</div>
+    <div id="calculator" class="content">calculatorの内容</div>
+    <div id="url" class="content">urlの内容</div>
+
+    <div id="now" class="content">
+      <dl>
+        <dd>
+          <dt>選択</dt>
+          <label>
+            <input type="radio" name="spot" value="東京" required>東京
+          </label>
+          <label>
+            <input type="radio" name="spot" value="ニューヨーク">ニューヨーク
+          </label>
+          <lavel>
+            <input type="radio" name="spot" value="標準時">標準時
+          </lavel>
+        </dd>
+      </dl>
+      <p id="nowGeneratedText">ここに生成されたテキストが表示されます。</p>
+      <button type="button" onclick="now()">送信</button>
+      <button type="button" onclick="copyText('nowGeneratedText')">コピー</button>
+    </div>
+    <div id="embed" class="content">embedの内容</div>
+    <div id="delete" class="content">deleteの内容</div>
+    <div id="role" class="content">
+      <dl>
+        <dd>
+          <dt>選択</dt>
+          <dd>
+            <dt>ロールID</dt>
+            <input type="text" name="roleid" value="roleid" id="roleid" required>
+          </dd>
+        </dd>
+      </dl>
+      <p id="roleGeneratedText">ここに生成されたテキストが表示されます。</p>
+      <button type="button" onclick="roles()">送信</button>
+      <button type="button" onclick="copyText('roleGeneratedText')">コピー</button>
+    </div>
+    <div id="timer" class="content">timerの内容</div>
+    <div id="rss" class="content">rssの内容</div>
+    <div id="reply" class="content">replyの内容</div>
+    <div id="sec" class="content">secの内容</div>
+    <div id="lock" class="content">lockの内容</div>
+    <div id="afk" class="content">afkの内容</div>
+    <div id="log" class="content">logの内容</div>
+    <div id="channel" class="content">channelの内容</div>
+
+    <script>
+      function showContent() {
+        // すべてのコンテンツを非表示にする
+        const contents = document.querySelectorAll('.content');
+        contents.forEach(content => content.classList.remove('visible'));
+
+        // 選択されたオプションに応じて表示内容を切り替える
+        const selectedValue = document.getElementById('menu').value;
+        if (selectedValue) {
+          const contentToShow = document.getElementById(selectedValue);
+          if (contentToShow) {
+            contentToShow.classList.add('visible');
+          }
+        }
+      }
+
+      function anonymous() {
+        // ラジオボタンの選択された値を取得
+        if (!document.querySelector("input[name='action']:checked")) {
+          return alert('actionが不足している可能性があります。');
+        }
+        const action = document.querySelector("input[name='action']:checked").value;
+        const content = document.getElementById('content').value;
+
+        // テキストを生成
+        let generatedText = `/anonymous action:${action} content:${content}`;
+
+        // 生成されたテキストを表示
+        document.getElementById('anonymousGeneratedText').textContent = generatedText;
+      }
+      
+      function invite() {
+        // ラジオボタンの選択された値を取得
+        if (!document.querySelector("input[name='choice']:checked")) {
+          return alert('choiceが不足している可能性があります。');
+        }
+        const action = document.querySelector("input[name='choice']:checked").value;
+
+        // テキストを生成
+        let generatedText = `/invite choice:${action}`;
+
+        // 生成されたテキストを表示
+        document.getElementById('inviteGeneratedText').textContent = generatedText;
+      }
+      
+      function now() {
+        // ラジオボタンの選択された値を取得
+        if (!document.querySelector("input[name='spot']:checked")) {
+          return alert('spotが不足している可能性があります。');
+        }
+        const action = document.querySelector("input[name='spot']:checked").value;
+
+        // テキストを生成
+        let generatedText = `/now spot:${action}`;
+
+        // 生成されたテキストを表示
+        document.getElementById('nowGeneratedText').textContent = generatedText;
+      }
+      
+      function roles() {
+        const roleid = document.getElementById('roleid').value;
+
+        // テキストを生成
+        let generatedText = `/role roleid:${roleid}`;
+
+        // 生成されたテキストを表示
+        document.getElementById('roleGeneratedText').textContent = generatedText;
+      }
+
+      function copyText(targetId) {
+        // 引数からテキストを取得
+        const textToCopy = document.getElementById(targetId).textContent;
+
+        // 「ここに生成されたテキストが表示されます。」が表示されている場合はコピーしない
+        if (textToCopy === "ここに生成されたテキストが表示されます。") {
+          alert('表示されたテキストをコピーしてください。');
+          return;
+        }
+
+        // テキストをクリップボードにコピー
+        navigator.clipboard.writeText(textToCopy)
+          .then(() => {
+            alert('テキストをコピーしました: ' + textToCopy);
+          })
+          .catch(err => {
+            alert('コピーに失敗しました: ' + err);
+          });
+      }
+    </script>
+  </form>
+</body>
+</html>

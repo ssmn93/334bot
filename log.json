@@ -1,0 +1,36 @@
+{
+  "1089047902460067842": [
+    {
+      "choice": "start",
+      "mentions": false
+    },
+    {
+      "choice": "message",
+      "mentions": "1114542009802297474"
+    }
+  ],
+  "1265978873129078784": [
+    {
+      "choice": "start",
+      "mentions": false
+    }
+  ],
+  "1317340230562349146": [
+    {
+      "choice": "voice",
+      "mentions": false
+    }
+  ],
+  "1154279005327990804": [
+    {
+      "choice": "join",
+      "mentions": "1114542009802297474"
+    }
+  ],
+  "1222927260877717677": [
+    {
+      "choice": "join",
+      "mentions": false
+    }
+  ]
+}
