@@ -7,6 +7,13 @@ require('dotenv').config();
 const userIdnia = '958175221800636496';
 const { get } = require('https');
 const { createWriteStream } = require('fs');
+import { serve } from "@hono/node-server";
+import healthCheckServer from "./server";
+
+serve({
+  fetch: healthCheckServer.fetch,
+  port: 8000,
+});
 
 //よくわからないやつ
 const client = new Client({
