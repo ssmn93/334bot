@@ -11,6 +11,7 @@
     "@fastify/formbody": "^7.4.0",
     "@fastify/static": "^6.10.2",
     "@fastify/view": "^8.0.0",
+    "axios": "^1.7.2",
     "canvas": "^2.11.2",
     "cheerio": "^1.0.0",
     "cron": "^3.1.7",
@@ -29,9 +30,8 @@
     "play-dl": "^1.9.7",
     "request": "^2.88.2",
     "rss-parser": "^3.13.0",
+    "tsx": "^4.7.0",
     "web-streams-polyfill": "^4.0.0",
     "yt-dlp-wrap": "^2.3.12",
-    "ytdl-core": "^4.11.5",
-    "tsx": "^4.7.0"
   }
 }
