@@ -1,10 +1,9 @@
 {
-  "name": "glitch-hello-node",
-  "version": "0.1.0",
-  "description": "A simple Node app built on fastify, instantly up and running. Built to be remixed on Glitch.com.",
-  "main": "server.js",
+  "name": "334bot",
   "scripts": {
     "start": "tsx src/server.js",
+    "build": "tsc",
+    "dev": "tsx watch src/server.js"
   },
   "dependencies": {
     "@discordjs/voice": "^0.17.0",
@@ -34,19 +33,6 @@
     "web-streams-polyfill": "^4.0.0",
     "yt-dlp-wrap": "^2.3.12",
     "ytdl-core": "^4.11.5"
-  },
-  "engines": {
-    "node": "^16.14.0"
-  },
-  "repository": {
-    "url": "https://glitch.com/edit/#!/334bot-newest"
-  },
-  "license": "MIT",
-  "keywords": [
-    "node",
-    "glitch"
-  ],
-  "devDependencies": {
-    "npm-run-all": "^4.1.5"
+    "tsx": "^4.7.0"
   }
 }
