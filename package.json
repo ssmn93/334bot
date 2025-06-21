@@ -33,5 +33,6 @@
     "tsx": "^4.7.0",
     "web-streams-polyfill": "^4.0.0",
     "yt-dlp-wrap": "^2.3.12",
+    "ytdl-core": "^4.11.5"
   }
 }
