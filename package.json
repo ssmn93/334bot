@@ -11,7 +11,6 @@
     "@fastify/formbody": "^7.4.0",
     "@fastify/static": "^6.10.2",
     "@fastify/view": "^8.0.0",
-    "axios": "^1.7.2",
     "canvas": "^2.11.2",
     "cheerio": "^1.0.0",
     "cron": "^3.1.7",
