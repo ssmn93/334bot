@@ -4,7 +4,7 @@
   "description": "A simple Node app built on fastify, instantly up and running. Built to be remixed on Glitch.com.",
   "main": "server.js",
   "scripts": {
-    "start": "tsx src/index.ts",
+    "start": "tsx src/server.js",
   },
   "dependencies": {
     "@discordjs/voice": "^0.17.0",
