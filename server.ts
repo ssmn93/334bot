@@ -19,5 +19,6 @@ serve({
   fetch: app.fetch,
   port,
 }, () => {
-  console.log(`✅ Server running at http://localhost:${port}`);
+  console.log(`✅ Server running at http://localhost:${port}`);  
+  require('./main.js')
 });
