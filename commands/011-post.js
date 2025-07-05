@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const axios = require('axios');
 
 const restrictedTags = ['#melody', '#train', '#ad']; // 特定のタグリスト
 
