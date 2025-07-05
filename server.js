@@ -8,7 +8,7 @@ const userIdnia = '958175221800636496';
 const { get } = require('https');
 const { createWriteStream } = require('fs');
 import { serve } from "@hono/node-server";
-import healthCheckServer from "./server.ts";
+import healthCheckServer from "./run.js";
 import { startHealthCheckCron } from "./cron.ts";
 
 serve({
