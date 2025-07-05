@@ -1,8 +1,9 @@
 import { Hono } from "hono";
+import { serve } from "@hono/node-server";
 
 const app = new Hono();
 
-// ヘルスチェック用のエンドポイント
+// ヘルスチェック用エンドポイント
 app.get("/", (c) => {
   return c.json({
     status: "ok",
@@ -12,10 +13,11 @@ app.get("/", (c) => {
   });
 });
 
-export default app;
-
 const port = parseInt(process.env.PORT || '3000', 10);
 
-app.listen({ port }, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+serve({
+  fetch: app.fetch,
+  port,
+}, () => {
+  console.log(`✅ Server running at http://localhost:${port}`);
 });
