@@ -13,3 +13,9 @@ app.get("/", (c) => {
 });
 
 export default app;
+
+const port = parseInt(process.env.PORT || '3000', 10);
+
+app.listen({ port }, () => {
+  console.log(`Server is running at http://localhost:${port}`);
+});
