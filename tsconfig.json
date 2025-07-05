@@ -7,5 +7,5 @@
     "checkJs": false,
     "noEmit": true
   },
-  "include": ["src/**/*", "index.js"]
+  "include": ["*.js"]
 }
