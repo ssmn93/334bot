@@ -1,7 +1,5 @@
-import { Hono } from "hono";
-import { serve } from "@hono/node-server";
-
-const app = new Hono();
+const express = require('express');
+const app = express();
 
 // ヘルスチェック用エンドポイント
 app.get("/", (c) => {
@@ -15,10 +13,8 @@ app.get("/", (c) => {
 
 const port = parseInt(process.env.PORT || '3000', 10);
 
-serve({
-  fetch: app.fetch,
-  port,
-}, () => {
-  console.log(`✅ Server running at http://localhost:${port}`);  
-  require('./server.js')
+app.listen(3000, () => {
+  console.log(`サーバーを開きました`);
 });
+
+require('./server.js')
