@@ -1,15 +1,15 @@
 const express = require('express');
 const app = express();
 
-// ヘルスチェック用エンドポイント
-app.get("/", (c) => {
-  return c.json({
-    status: "ok",
-    message: "Discord Bot is running",
-    node_version: process.version,
-    timestamp: new Date().toISOString(),
+app.use(express.static(path.join(__dirname, 'pages')));
+
+app.get("/", (req, res) => {
+  fs.readFile("./pages/index.html", (err, data) => {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    res.write(data);
+    res.end();
   });
-});
+})
 
 const port = parseInt(process.env.PORT || '3000', 10);
 
