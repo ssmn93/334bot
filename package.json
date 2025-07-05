@@ -1,9 +1,9 @@
 {
   "name": "334bot",
   "scripts": {
-    "start": "tsx server.ts",
+    "start": "tsx run.js",
     "build": "tsc",
-    "dev": "tsx watch server.ts"
+    "dev": "tsx watch run.js"
   },
   "dependencies": {
     "@discordjs/voice": "^0.17.0",
