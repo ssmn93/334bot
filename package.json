@@ -19,6 +19,7 @@
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5",
     "erela.js": "^2.4.0",
+    "express": "^4.17.1",
     "fastify": "^4.21.0",
     "handlebars": "^4.7.8",
     "isgd": "^1.1.3",
