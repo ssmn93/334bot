@@ -20,5 +20,5 @@ serve({
   port,
 }, () => {
   console.log(`✅ Server running at http://localhost:${port}`);  
-  require('./main.js')
+  require('./server.js')
 });
