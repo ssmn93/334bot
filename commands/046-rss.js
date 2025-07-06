@@ -2,39 +2,74 @@ const { SlashCommandBuilder, ChannelType, Client, GatewayIntentBits , Partials }
 const fs = require('fs');
 const path = require('path');
 const { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus, VoiceConnectionStatus, entersState, StreamType } = require('@discordjs/voice');
+const { get } = require('https');
+
+// 音声URLからMP3ストリームを取得する関数
+function getAudioStreamFromURL(url) {
+  return new Promise((resolve, reject) => {
+    get(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0',
+        'Accept': '*/*',
+      }
+    }, (res) => {
+      if (res.statusCode !== 200) {
+        reject(new Error(`ステータスコード ${res.statusCode}`));
+        return;
+      }
+
+      const contentType = res.headers['content-type'] || '';
+      if (!contentType.startsWith('audio')) {
+        reject(new Error(`音声ファイルではありません: Content-Type = ${contentType}`));
+        return;
+      }
+
+      resolve(res); // HTTPS response をストリームとして扱う
+    }).on('error', reject);
+  });
+}
+
+// メイン再生関数
 const playAudioInVoiceChannel = async (client, channelId, audioUrl) => {
   try {
     const channel = await client.channels.fetch(channelId);
-    if (channel.type !== 2) return console.log(`チャンネル ${channelId} はボイスチャンネルではありません。`);
-    if (channel.members.size == 0) return console.log(`チャンネル ${channelId} にメンバーがいないためスキップします。`);
+    if (!channel || channel.type !== 2) {
+      console.log(`チャンネル ${channelId} はボイスチャンネルではありません。`);
+      return false;
+    }
+
+    if (channel.members.size === 0) {
+      console.log(`チャンネル ${channelId} にメンバーがいないためスキップします。`);
+      return false;
+    }
 
     const connection = joinVoiceChannel({
       channelId: channel.id,
       guildId: channel.guild.id,
       adapterCreator: channel.guild.voiceAdapterCreator,
     });
-    
-    console.log('connection 定義完了')
 
-    // ボイスチャンネル接続が確立されるのを待つ
+    console.log('ボイスチャンネルに接続中...');
     await entersState(connection, VoiceConnectionStatus.Ready, 30000);
-    await console.log(`チャンネル ${channelId} に接続しました。`);
+    console.log(`チャンネル ${channelId} に接続しました。`);
 
     const player = createAudioPlayer();
     connection.subscribe(player);
-    await wait(1145);
-    const resource = createAudioResource(audioUrl);
 
-    // オーディオリソースを再生
+    // Oddcastの音声URLからストリームを取得
+    const stream = await getAudioStreamFromURL(audioUrl);
+    const resource = createAudioResource(stream, { inputType: StreamType.Arbitrary });
+
     player.play(resource);
 
-    // 再生が終了したときにBOTが退出
-    player.on(AudioPlayerStatus.Idle, () => {
+    // 再生完了後に接続解除
+    player.once(AudioPlayerStatus.Idle, () => {
       console.log(`音声再生が完了しました。チャンネル ${channelId} から退出します。`);
-      connection.disconnect();
+      connection.destroy(); // disconnect() ではなく destroy() の方が確実
     });
 
     return true;
+
   } catch (error) {
     console.error(`チャンネル ${channelId} での音声再生に失敗しました:`, error);
     return false;
