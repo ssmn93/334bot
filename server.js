@@ -7,15 +7,15 @@ require('dotenv').config();
 const userIdnia = '958175221800636496';
 const { get } = require('https');
 const { createWriteStream } = require('fs');
-import { serve } from "@hono/node-server";
-import healthCheckServer from "./run.js";
-import { startHealthCheckCron } from "./cron.ts";
+// import { serve } from "@hono/node-server";
+// import healthCheckServer from "./run.js";
+// import { startHealthCheckCron } from "./cron.ts";
 
-serve({
-  fetch: healthCheckServer.fetch,
-  port: 8000,
-});
-startHealthCheckCron();
+// serve({
+//   fetch: healthCheckServer.fetch,
+//   port: 8000,
+// });
+// startHealthCheckCron();
 
 //よくわからないやつ
 const client = new Client({
