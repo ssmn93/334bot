@@ -34,7 +34,6 @@ const client = new Client({
   ]
 });
 
-
 const targetTime = new Date();
 targetTime.setFullYear(2024);
 targetTime.setMonth(7); // 7は8月を表します (0から始まるため)
@@ -96,8 +95,6 @@ const fetchRSS = async (url) => {
 };
 
 const countdownDate = new Date('2024-08-05T15:00:00');
-
-
 
 // client.once('ready', () => {
 //   if (niconico !== 1) return;
@@ -186,7 +183,12 @@ const axo = `# <@${axoid}>` + '\n' + 'https://cdn.discordapp.com/attachments/124
 const tsnid = client.users.cache.get('1128637676766117938');
 
 //Webview起動用
-const http = require('http');
+let http;
+try {
+  http = require('http');
+} catch(error) {
+  console.error(error);
+}
 
 const write = (
   '　　　ロ　阪' + '\n' +
@@ -198,17 +200,26 @@ const write = (
 );
 
 // Webサーバーの起動とエラーハンドリング
-const server = http.createServer((req, res) => {
-  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-  res.write(write);
-  res.end();
-});
+let server;
+try {
+  server = http.createServer((req, res) => {
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.write(write);
+    res.end();
+  });
+} catch(error) {
+  console.error(error);
+}
 
 server.on('error', err => {
   console.log('Server error:', err);
 });
 
-server.listen(8080);
+try {
+  server.listen(8080);
+} catch(error) {
+  console.error(error);
+}
 
 // ボットのログイン
 client.login(process.env.logintoken);
