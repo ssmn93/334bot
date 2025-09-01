@@ -51,7 +51,7 @@ client.once(Events.ClientReady, async () => {
         } else if (niconico === 0 && saigai !== 1 && camp === 1) {
             client.user.setPresence({ activities: [{ name: '夏季キャンプ' }], status: 'online' });
         } else if (niconico === 0 && saigai !== 1 && camp !== 1  && offkai === 0) {
-            client.user.setPresence({ activities: [{ name: '日本シリーズ' }], status: 'online' });
+            client.user.setPresence({ activities: [{ name: 'Render環境での仮稼働中' }], status: 'online', type: ActivityType.Custom });
         } else if (niconico === 0 && saigai !== 1 && offkai === 1) {
             client.user.setPresence({ activities: [{ name: 'オフ会' }], status: 'online' })
         } else if (niconico === 1 && saigai !== 1) return;
