@@ -113,7 +113,7 @@ client.on('interactionCreate', async interaction => {
           return interaction.reply({ content: "カテゴリ情報が見つかりません。", ephemeral: true });
         }
         const categoryName = embed.title;
-        const category = guild.channels.cache.find(
+        const category = interaction.guild.channels.cache.find(
            (ch) => ch.type === ChannelType.GuildCategory && ch.name === categoryName
         );
         if (category) {
