@@ -91,7 +91,12 @@ module.exports = {
 // --- ボタン押下時の処理 ---
 client.on('interactionCreate', async interaction => {
     if (interaction.isButton()) {
-      if (interaction.component.label !== "生成" && interaction.component.label !== "クローズする") return;
+      if (interaction.component.label !== "生成" && interaction.component.label !== "クローズする") {
+        console.log(interaction.component.label);
+        console.log("い");
+        return;
+      }
+      console.log("あ");
         const tickets = JSON.parse(fs.readFileSync(ticketFilePath, 'utf8'));
         const ticketEntry = tickets.find(entry => entry.messageId === interaction.message.id);
         const closes = JSON.parse(fs.readFileSync(closeFilePath, 'utf8'));
