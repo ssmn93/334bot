@@ -61,7 +61,7 @@ module.exports = {
           return;
         }
       
-          const category = guild.channels.cache.find(
+          const category = interaction.guild.channels.cache.find(
             (ch) => ch.type === ChannelType.GuildCategory && ch.name === title
           );
 
