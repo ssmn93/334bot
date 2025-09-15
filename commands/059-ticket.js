@@ -103,47 +103,10 @@ client.on('interactionCreate', async interaction => {
         let category = interaction.guild.channels.cache.find(
            (ch) => ch.type === ChannelType.GuildCategory && ch.name === categoryName
         );
-      if (categoryName.includes("ようこそ")) {
-          try {
-            const channel = interaction.channel;
-          
-            const members = channel.members;
-          
-            const targets = members.filter(
-              (member) => !member.permissions.has(PermissionFlagsBits.Administrator)
-            );
-          
-            // 権限を編集（発言禁止にする例）
-            for (const member of targets.values()) {
-              await channel.permissionOverwrites.edit(member.id, {
-                SendMessages: false,
-              });
-            }
-
-            const oldName = channel.name;
-            channel.setName(oldName.replace(/^secret-/, "closed-"));
-            
-            await interaction.reply({
-              content: "チケットをクローズしました。",
-            });
-            
-          } catch(error) {
-                console.error(error);
-                if (!interaction.replied) {
-                    await interaction.reply({ content: 'チケットの操作に失敗しました。チャンネル作成の権限がbotに付与されているかなどを、サーバーの管理者に確認してください。', components: [], ephemeral: true });
-                }
-          }
-        } else {
+        if (category) {
             try {
                 const user = interaction.member;
                 const guild = interaction.guild;
-
-                if (!category) {
-                  category = await interaction.guild.channels.create({
-                    name: categoryName,
-                    type: ChannelType.GuildCategory,
-                  });
-                }
               
                 const secretChannels = guild.channels.cache.filter(
                   (ch) => ch.parentId === category.id && /^secret-\d{4}$/.test(ch.name)
@@ -205,6 +168,38 @@ client.on('interactionCreate', async interaction => {
                     await interaction.reply({ content: 'チケットの操作に失敗しました。チャンネル作成の権限がbotに付与されているかなどを、サーバーの管理者に確認してください。', components: [], ephemeral: true });
                 }
               }
+        } else if (categoryName.includes("ようこそ")) {
+          try {
+            const channel = interaction.channel;
+          
+            const members = channel.members;
+          
+            const targets = members.filter(
+              (member) => !member.permissions.has(PermissionFlagsBits.Administrator)
+            );
+          
+            // 権限を編集（発言禁止にする例）
+            for (const member of targets.values()) {
+              await channel.permissionOverwrites.edit(member.id, {
+                SendMessages: false,
+              });
+            }
+
+            const oldName = channel.name;
+            channel.setName(oldName.replace(/^secret-/, "closed-"));
+            
+            await interaction.reply({
+              content: "チケットをクローズしました。",
+            });
+            
+          } catch(error) {
+                console.error(error);
+                if (!interaction.replied) {
+                    await interaction.reply({ content: 'チケットの操作に失敗しました。チャンネル作成の権限がbotに付与されているかなどを、サーバーの管理者に確認してください。', components: [], ephemeral: true });
+                }
+          }
+        } else {
+          await interaction.reply({ content: 'チケットの操作に問題が発生しました。/ticketを実行して、チケットおアネルを作り直してください。', components: [], ephemeral: true });
         }
     }
 });
