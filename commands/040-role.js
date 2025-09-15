@@ -324,6 +324,7 @@ module.exports = {
 // --- ボタン押下時の処理 ---
 client.on('interactionCreate', async interaction => {
     if (interaction.isButton()) {
+      if (interaction.component.label === "生成") return;
         const roles = JSON.parse(fs.readFileSync(rolesFilePath, 'utf8'));
         const roleEntry = roles.find(entry => entry.messageId === interaction.message.id);
         if (!roleEntry) {
