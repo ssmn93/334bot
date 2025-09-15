@@ -1,5 +1,5 @@
 const { REST, Routes } = require('discord.js');
-const clientId = client.user.id;
+const clientId = "1203540848629780491";
 const token = process.env.logintoken;
 const fs = require('node:fs');
 
