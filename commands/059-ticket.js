@@ -147,20 +147,20 @@ client.on('interactionCreate', async interaction => {
                 ephemeral: true,
               });
 
-              const button = new ButtonBuilder()
+              const button2 = new ButtonBuilder()
                 .setCustomId('close_button')
                 .setLabel(`クローズする`)
                 .setStyle(ButtonStyle.Primary);
 
-              const row = new ActionRowBuilder().addComponents(button);
-              const embed = new EmbedBuilder()
+              const row2 = new ActionRowBuilder().addComponents(button2);
+              const embed2 = new EmbedBuilder()
                  .setTitle(title)
                  .setDescription(`チケットをクローズするには、ボタンを押してください。`)
                  .setColor('#FFE201');
 
               const message = await channel.send({
-                embeds: [embed],
-                components: [row],
+                embeds: [embed2],
+                components: [row2],
                 fetchReply: true
               });
               
