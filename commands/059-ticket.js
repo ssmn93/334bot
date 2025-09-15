@@ -60,6 +60,20 @@ module.exports = {
           await interaction.reply({ content: '権限不足です', ephemeral: true });
           return;
         }
+      
+          const category = guild.channels.cache.find(
+            (ch) => ch.type === ChannelType.GuildCategory && ch.name === title
+          );
+
+          if (category) {
+            await interaction.reply({ content: 'タイトルが重複するチケットが存在します。タイトルを変えてやり直してください。', ephemeral: true });
+            return;
+          }
+
+          if (title.includes("ようこそ")) {
+            await interaction.reply({ content: '「ようこそ」をタイトルに含むチケットは作成できません。', ephemeral: true });
+            return;
+          }
 
           await interaction.guild.channels.create({
             name: title,
@@ -92,31 +106,20 @@ module.exports = {
 client.on('interactionCreate', async interaction => {
     if (interaction.isButton()) {
       if (interaction.component.label !== "生成" && interaction.component.label !== "クローズする") {
-        console.log(interaction.component.label);
-        console.log("い");
         return;
       }
-      console.log("あ");
-        const tickets = JSON.parse(fs.readFileSync(ticketFilePath, 'utf8'));
-        const ticketEntry = tickets.find(entry => entry.messageId === interaction.message.id);
-        const closes = JSON.parse(fs.readFileSync(closeFilePath, 'utf8'));
-        const closesEntry = closes.find(entry => entry.messageId === interaction.message.id);
-        if (ticketEntry) {
+        const embed = interaction.message.embeds[0];
+        if (!embed) {
+          return interaction.reply({ content: "カテゴリ情報が見つかりません。", ephemeral: true });
+        }
+        const categoryName = embed.title;
+        const category = guild.channels.cache.find(
+           (ch) => ch.type === ChannelType.GuildCategory && ch.name === categoryName
+        );
+        if (category) {
             try {
-                const embed = interaction.message.embeds[0];
-                if (!embed) {
-                  return interaction.reply({ content: "カテゴリ情報が見つかりません。", ephemeral: true });
-                }
-                const categoryName = embed.title;
                 const user = interaction.member;
                 const guild = interaction.guild;
-                const category = guild.channels.cache.find(
-                  (ch) => ch.type === ChannelType.GuildCategory && ch.name === categoryName
-                );
-
-                if (!category) {
-                  return interaction.reply({ content: `カテゴリ「${categoryName}」が見つかりません。`, ephemeral: true });
-                }
               
                 const secretChannels = guild.channels.cache.filter(
                   (ch) => ch.parentId === category.id && /^secret-\d{4}$/.test(ch.name)
@@ -162,7 +165,7 @@ client.on('interactionCreate', async interaction => {
 
               const row2 = new ActionRowBuilder().addComponents(button2);
               const embed2 = new EmbedBuilder()
-                 .setTitle(title)
+                 .setTitle(`チケット${categoryName}へようこそ`)
                  .setDescription(`チケットをクローズするには、ボタンを押してください。`)
                  .setColor('#FFE201');
 
@@ -178,7 +181,7 @@ client.on('interactionCreate', async interaction => {
                     await interaction.reply({ content: 'チケットの操作に失敗しました。チャンネル作成の権限がbotに付与されているかなどを、サーバーの管理者に確認してください。', components: [], ephemeral: true });
                 }
               }
-        } else if (closesEntry) {
+        } else if (categoryName.includes("ようこそ")) {
           try {
             const channel = interaction.channel;
           
