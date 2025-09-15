@@ -30,19 +30,6 @@ const client = new Client({
 });
 const { PermissionsBitField } = require('discord.js');
 
-const ticketFilePath = path.join(__dirname, 'ticket.json');
-if (!fs.existsSync(ticketFilePath)) {
-    fs.writeFileSync(ticketFilePath, JSON.stringify([]));
-}
-const closeFilePath = path.join(__dirname, 'close.json');
-if (!fs.existsSync(closeFilePath)) {
-    fs.writeFileSync(closeFilePath, JSON.stringify([]));
-}
-
-const saveData = (data) => {
-    fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2));
-};
-
 // --- Slash Command の実装 ---
 module.exports = {
     data: new SlashCommandBuilder()
@@ -153,7 +140,7 @@ client.on('interactionCreate', async interaction => {
 
                 if (!category) {
                   category = await interaction.guild.channels.create({
-                    name: title,
+                    name: categoryName,
                     type: ChannelType.GuildCategory,
                   });
                 }
